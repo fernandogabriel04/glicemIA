@@ -129,33 +129,3 @@ Marque cada item ao concluir:
 Crie um arquivo de teste `TestConnection.java`:
 
 **Execute** e verifique se a conexão é bem-sucedida.
-
-### Possíveis Erros e Soluções:
-
-**Erro: "No suitable driver found"**
-```
-Solução: Adicione a dependência postgresql-42.7.1.jar no classpath
-```
-
-**Erro: "Connection refused"**
-```
-Solução: Verifique a connection string do NeonDB
-Certifique-se de que ?sslmode=require está no final da URL
-```
-
-**Erro: "Authentication failed"**
-```
-Solução: Verifique username e password no database.properties
-Eles devem corresponder aos dados do NeonDB
-```
-
-## 📌 Próximos Passos
-
-Após concluir esta fase com sucesso:
-
-1. Commit inicial do código (se estiver usando Git)
-2. Vá para **[Fase 02 - Modelo de Domínio (Value Objects)](./02-modelo-dominio-vo.md)**
-
----
-
-**Dúvidas?** Revise os pré-requisitos e certifique-se de que todas as ferramentas estão instaladas corretamente.
