@@ -27,10 +27,16 @@ Sistema de monitoramento de sinais vitais (glicemia, pressão arterial e peso) c
 ## ⚙️ Configuração
 
 1. Clone o repositório
-2. Configure o arquivo `src/main/resources/database.properties` com as credenciais NeonDB
-3. Execute o script `database-setup.sql` no NeonDB
-4. Compile o projeto: `mvn clean install`
-5. Execute o teste de conexão: `mvn exec:java -Dexec.mainClass="br.com.glicemia.TestConnection"`
+2. Copie o arquivo `.env.example` para `.env` e configure suas credenciais:
+   ```bash
+   cp .env.example .env
+   ```
+3. Edite o arquivo `.env` com suas credenciais do NeonDB
+4. Execute o script `database-setup.sql` no console do NeonDB
+5. Compile o projeto: `mvn clean install`
+6. Execute o teste de conexão: `mvn exec:java -Dexec.mainClass="br.com.glicemia.TestConnection"`
+
+**Nota**: O arquivo `.env` contém informações sensíveis e está no `.gitignore` (não será commitado)
 
 ## 📂 Estrutura do Projeto
 
