@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class TestModelo {
     public static void main(String[] args) {
         System.out.println("╔════════════════════════════════════════╗");
-        System.out.println("║  Teste do Modelo de Domínio - Fase 02 ║");
+        System.out.println("║      Teste do Modelo de Domínio        ║");
         System.out.println("╚════════════════════════════════════════╝\n");
 
         try {

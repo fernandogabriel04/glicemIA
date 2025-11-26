@@ -5,7 +5,7 @@ import br.com.glicemia.util.DatabaseConnection;
 public class TestConnection {
     public static void main(String[] args) {
         System.out.println("╔════════════════════════════════════════╗");
-        System.out.println("║  Teste de Conexão GlicemIA + NeonDB   ║");
+        System.out.println("║  Teste de Conexão GlicemIA + NeonDB    ║");
         System.out.println("╚════════════════════════════════════════╝\n");
 
         System.out.println("Testando conexão com PostgreSQL (NeonDB)...\n");

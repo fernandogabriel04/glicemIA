@@ -10,7 +10,7 @@ import java.util.List;
 public class TestPolimorfismo {
     public static void main(String[] args) {
         System.out.println("╔════════════════════════════════════════╗");
-        System.out.println("║   Demonstração de Polimorfismo - F03  ║");
+        System.out.println("║      Demonstração de Polimorfismo      ║");
         System.out.println("╚════════════════════════════════════════╝\n");
 
         List<Diagnosticavel> sinaisVitais = new ArrayList<>();
