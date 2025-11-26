@@ -93,6 +93,15 @@
                             <mainClass>br.com.glicemia.TestModelo</mainClass>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>test-polimorfismo</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>br.com.glicemia.TestPolimorfismo</mainClass>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
@@ -109,6 +118,12 @@
             <id>test-modelo</id>
             <build>
                 <defaultGoal>compile exec:java@test-modelo</defaultGoal>
+            </build>
+        </profile>
+        <profile>
+            <id>test-polimorfismo</id>
+            <build>
+                <defaultGoal>compile exec:java@test-polimorfismo</defaultGoal>
             </build>
         </profile>
     </profiles>
