@@ -84,6 +84,15 @@
                             <mainClass>br.com.glicemia.TestConnection</mainClass>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>test-modelo</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>br.com.glicemia.TestModelo</mainClass>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
@@ -94,6 +103,12 @@
             <id>test-connection</id>
             <build>
                 <defaultGoal>compile exec:java@test-connection</defaultGoal>
+            </build>
+        </profile>
+        <profile>
+            <id>test-modelo</id>
+            <build>
+                <defaultGoal>compile exec:java@test-modelo</defaultGoal>
             </build>
         </profile>
     </profiles>
