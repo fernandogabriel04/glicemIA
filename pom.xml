@@ -111,6 +111,15 @@
                             <mainClass>br.com.glicemia.TestDAO</mainClass>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>test-bo</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>br.com.glicemia.TestBusinessObject</mainClass>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
@@ -139,6 +148,12 @@
             <id>test-dao</id>
             <build>
                 <defaultGoal>compile exec:java@test-dao</defaultGoal>
+            </build>
+        </profile>
+        <profile>
+            <id>test-bo</id>
+            <build>
+                <defaultGoal>compile exec:java@test-bo</defaultGoal>
             </build>
         </profile>
     </profiles>
