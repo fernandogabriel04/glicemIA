@@ -1,6 +1,8 @@
 package br.com.glicemia.model.vo;
 
 import br.com.glicemia.model.exceptions.ValorInvalidoException;
+import br.com.glicemia.model.exceptions.RiscoEmergenciaException;
+import br.com.glicemia.model.NivelRisco;
 
 public class Glicemia extends SinalVital {
 
@@ -14,6 +16,92 @@ public class Glicemia extends SinalVital {
         this.valorGlicemia = valorGlicemia;
         this.emJejum = emJejum;
         validar();
+    }
+
+    @Override
+    public NivelRisco analisarRisco() throws RiscoEmergenciaException {
+        NivelRisco risco;
+
+        if (valorGlicemia < 50) {
+            risco = NivelRisco.CRITICO;
+            setNivelRisco(risco);
+            throw new RiscoEmergenciaException(
+                "HIPOGLICEMIA SEVERA detectada: " + valorGlicemia + " mg/dL",
+                "CRITICO",
+                "1. Ingerir 15g de carboidrato simples\n" +
+                "2. Aguardar 15 minutos e medir novamente\n" +
+                "3. Se < 70 mg/dL, procure emergência IMEDIATAMENTE"
+            );
+        }
+
+        if (valorGlicemia >= 300) {
+            risco = NivelRisco.CRITICO;
+            setNivelRisco(risco);
+            throw new RiscoEmergenciaException(
+                "HIPERGLICEMIA SEVERA detectada: " + valorGlicemia + " mg/dL",
+                "CRITICO",
+                "1. Beber água imediatamente\n" +
+                "2. NÃO se exercitar\n" +
+                "3. Procurar atendimento médico URGENTE"
+            );
+        }
+
+        if (emJejum) {
+            if (valorGlicemia < 70) {
+                risco = NivelRisco.ALTO;
+            } else if (valorGlicemia <= 99) {
+                risco = NivelRisco.NORMAL;
+            } else if (valorGlicemia <= 125) {
+                risco = NivelRisco.ATENCAO;
+            } else {
+                risco = NivelRisco.ALTO;
+            }
+        } else {
+            if (valorGlicemia < 70) {
+                risco = NivelRisco.ALTO;
+            } else if (valorGlicemia <= 140) {
+                risco = NivelRisco.NORMAL;
+            } else if (valorGlicemia <= 199) {
+                risco = NivelRisco.ATENCAO;
+            } else {
+                risco = NivelRisco.ALTO;
+            }
+        }
+
+        setNivelRisco(risco);
+        return risco;
+    }
+
+    @Override
+    public String getRecomendacaoImediata() {
+        if (getNivelRisco() == null) {
+            return "Análise de risco não realizada";
+        }
+
+        switch (getNivelRisco()) {
+            case NORMAL:
+                return "Glicemia dentro dos valores normais. Continue monitorando.";
+
+            case ATENCAO:
+                if (emJejum) {
+                    return "Glicemia de jejum elevada. Consulte seu médico para avaliação.";
+                } else {
+                    return "Glicemia pós-prandial elevada. Revise sua alimentação.";
+                }
+
+            case ALTO:
+                if (valorGlicemia < 70) {
+                    return "Hipoglicemia detectada. Ingira carboidratos simples imediatamente.";
+                } else {
+                    return "Hiperglicemia detectada. Evite doces, beba água e consulte seu médico.";
+                }
+
+            case CRITICO:
+                return "EMERGÊNCIA MÉDICA. Siga o protocolo de emergência.";
+
+            default:
+                return "Status desconhecido";
+        }
     }
 
     @Override
