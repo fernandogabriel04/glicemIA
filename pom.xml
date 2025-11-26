@@ -102,6 +102,15 @@
                             <mainClass>br.com.glicemia.TestPolimorfismo</mainClass>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>test-dao</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>br.com.glicemia.TestDAO</mainClass>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
@@ -124,6 +133,12 @@
             <id>test-polimorfismo</id>
             <build>
                 <defaultGoal>compile exec:java@test-polimorfismo</defaultGoal>
+            </build>
+        </profile>
+        <profile>
+            <id>test-dao</id>
+            <build>
+                <defaultGoal>compile exec:java@test-dao</defaultGoal>
             </build>
         </profile>
     </profiles>
