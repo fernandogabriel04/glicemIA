@@ -41,7 +41,7 @@ Marque cada item ao concluir:
 
 ## 🎨 Exemplo Visual
 
-Quando executar o teste, você deverá ver:
+Quando executar o teste, você deverá ver algo como:
 
 ```
 ╔════════════════════════════════════════════╗
