@@ -228,6 +228,12 @@ public class RegistroDAOImpl implements RegistroDAO {
                 sinal.setIdRegistro(rs.getLong("id_registro"));
                 sinal.setDataHora(rs.getTimestamp("data_hora").toLocalDateTime());
                 sinal.setObservacoes(rs.getString("observacoes"));
+
+                String nivelRiscoStr = rs.getString("nivel_risco");
+                if (nivelRiscoStr != null) {
+                    NivelRisco risco = NivelRisco.valueOf(nivelRiscoStr);
+                    sinal.setNivelRiscoFromDB(risco);
+                }
             }
 
             return sinal;

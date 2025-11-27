@@ -28,6 +28,10 @@ public abstract class SinalVital implements Diagnosticavel {
         this.nivelRisco = nivelRisco;
     }
 
+    public void setNivelRiscoFromDB(NivelRisco nivelRisco) {
+        this.nivelRisco = nivelRisco;
+    }
+
     public Long getIdRegistro() {
         return idRegistro;
     }
