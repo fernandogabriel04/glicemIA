@@ -22,15 +22,24 @@ public class GerenciadorIA {
         String apiKey = props.getProperty("ia.api.key");
         String modelo = props.getProperty("ia.model", "gpt-3.5-turbo");
 
+        // DEBUG: Log das configurações carregadas
+        System.out.println("━━━ DEBUG: GerenciadorIA Inicialização ━━━");
+        System.out.println("Provider: " + provider);
+        System.out.println("API Key: " + (apiKey != null ? apiKey.substring(0, Math.min(20, apiKey.length())) + "..." : "null"));
+        System.out.println("Modelo: " + modelo);
+
         // Inicializa serviço principal
         if ("openai".equalsIgnoreCase(provider) && apiKey != null && !apiKey.isEmpty()) {
+            System.out.println("✓ Inicializando OpenAIService...");
             this.servicoPrincipal = new OpenAIService(apiKey, modelo);
         } else {
+            System.out.println("✗ OpenAI não inicializado (provider=" + provider + ", apiKey=" + (apiKey != null ? "presente" : "null") + ")");
             this.servicoPrincipal = null;
         }
 
         // Fallback local
         this.servicoFallback = new IALocalService();
+        System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
     }
 
     public String solicitarRecomendacao(List<SinalVital> historico, String pergunta) {
@@ -66,11 +75,18 @@ public class GerenciadorIA {
             ConversationSession session,
             String pergunta) {
 
+        // DEBUG
+        System.out.println("\n━━━ DEBUG: solicitarRecomendacaoConversacional ━━━");
+        System.out.println("Pergunta: " + pergunta);
+        System.out.println("servicoPrincipal: " + (servicoPrincipal != null ? "presente" : "null"));
+
         // Validação de tópico
         TopicValidator validator = new TopicValidator();
         if (!validator.isTopicoValido(pergunta)) {
+            System.out.println("✗ Pergunta rejeitada (fora do escopo)");
             return validator.getMensagemRejeicao();
         }
+        System.out.println("✓ Pergunta válida (dentro do escopo)");
 
         // Constrói prompt conversacional
         String promptConversacional = ConversationContextBuilder
@@ -81,34 +97,57 @@ public class GerenciadorIA {
 
         // Usa serviço de IA com fallback
         String resposta;
-        if (servicoPrincipal != null && servicoPrincipal.isDisponivel()) {
-            try {
+        if (servicoPrincipal != null) {
+            System.out.println("Verificando disponibilidade da OpenAI...");
+            boolean disponivel = servicoPrincipal.isDisponivel();
+            System.out.println("OpenAI disponível: " + disponivel);
 
-                fallbackAtivo = false;
+            if (disponivel) {
+                try {
+                    System.out.println("→ Chamando OpenAI...");
+                    fallbackAtivo = false;
 
-                // Chama IA com prompt conversacional
-                resposta = servicoPrincipal.solicitarRecomendacao(
-                    session.getHistoricoPaciente(),
-                    perguntaComTag
-                );
+                    // Chama IA com prompt conversacional
+                    resposta = servicoPrincipal.solicitarRecomendacao(
+                        session.getHistoricoPaciente(),
+                        perguntaComTag
+                    );
+                    System.out.println("✓ Resposta recebida da OpenAI");
 
-            } catch (Exception e) {
-                System.err.println("⚠ Falha no serviço principal de IA: " + e.getMessage());
-                System.out.println("Usando IA local como fallback...\n");
+                } catch (Exception e) {
+                    System.err.println("✗ Falha no serviço principal de IA: " + e.getMessage());
+                    e.printStackTrace();
+                    System.out.println("→ Usando IA local como fallback...\n");
+                    fallbackAtivo = true;
+
+                    try {
+                        resposta = servicoFallback.solicitarRecomendacao(
+                            session.getHistoricoPaciente(),
+                            pergunta
+                        );
+                    } catch (Exception ex) {
+                        System.err.println("✗ Fallback também falhou: " + ex.getMessage());
+                        return "Erro ao gerar recomendação: " + ex.getMessage();
+                    }
+                }
+            } else {
+                // OpenAI não disponível
+                System.out.println("✗ OpenAI não disponível, usando fallback");
                 fallbackAtivo = true;
 
                 try {
-
                     resposta = servicoFallback.solicitarRecomendacao(
                         session.getHistoricoPaciente(),
                         pergunta
                     );
                 } catch (Exception ex) {
+                    System.err.println("✗ Fallback falhou: " + ex.getMessage());
                     return "Erro ao gerar recomendação: " + ex.getMessage();
                 }
             }
         } else {
-            // Usa fallback local
+            // servicoPrincipal é null - usa fallback local
+            System.out.println("✗ servicoPrincipal é null, usando fallback");
             try {
 
                 fallbackAtivo = true;
@@ -118,6 +157,7 @@ public class GerenciadorIA {
                     pergunta
                 );
             } catch (Exception e) {
+                System.err.println("✗ Fallback falhou: " + e.getMessage());
                 return "Erro ao gerar recomendação: " + e.getMessage();
             }
         }

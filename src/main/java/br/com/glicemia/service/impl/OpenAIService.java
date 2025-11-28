@@ -71,40 +71,45 @@ public class OpenAIService implements ServicoIA {
 
         // Executa a requisição
         try (Response response = client.newCall(request).execute()) {
+            System.out.println("  ← Resposta HTTP: " + response.code() + " " + response.message());
+
             if (!response.isSuccessful()) {
+                String errorBody = response.body() != null ? response.body().string() : "sem corpo";
+                System.err.println("  ✗ Erro na API: " + errorBody);
                 throw new IOException("Erro na API OpenAI: " + response.code() +
-                                    " - " + response.message());
+                                    " - " + response.message() + " | " + errorBody);
             }
 
             String responseBody = response.body().string();
             JsonObject jsonResponse = gson.fromJson(responseBody, JsonObject.class);
 
             // Extrai a resposta
-            return jsonResponse
+            String conteudo = jsonResponse
                 .getAsJsonArray("choices")
                 .get(0).getAsJsonObject()
                 .getAsJsonObject("message")
                 .get("content").getAsString();
+
+            System.out.println("  ✓ Resposta extraída com sucesso (" + conteudo.length() + " caracteres)");
+            return conteudo;
         }
     }
 
     @Override
     public boolean isDisponivel() {
-        try {
-            // Tenta fazer uma requisição simples para verificar conectividade
-            Request request = new Request.Builder()
-                .url(API_URL)
-                .header("Authorization", "Bearer " + apiKey)
-                .head()
-                .build();
+        // DEBUG
+        System.out.println("  → Verificando disponibilidade da OpenAI...");
+        System.out.println("  API Key presente: " + (apiKey != null && !apiKey.isEmpty()));
+        System.out.println("  Modelo: " + modelo);
 
-            try (Response response = client.newCall(request).execute()) {
-                return response.isSuccessful() || response.code() == 401;
-                // (apenas chave inválida)
-            }
-        } catch (Exception e) {
-            return false;
-        }
+        // A API da OpenAI não suporta HEAD requests no endpoint de chat.
+        // Verificamos apenas se a API key está configurada.
+        // Erros de conectividade/autenticação serão capturados no método solicitarRecomendacao().
+        boolean disponivel = apiKey != null && !apiKey.isEmpty();
+
+        System.out.println("  " + (disponivel ? "✓" : "✗") + " API disponível: " + disponivel);
+
+        return disponivel;
     }
 
     @Override
