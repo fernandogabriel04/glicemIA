@@ -59,7 +59,7 @@ public class MenuPrincipal {
         System.out.println("╚══════════════════════════════════════════════════╝");
         System.out.println("\nSistema de monitoramento de diabéticos e hipertensos com IA");
         System.out.println("Desenvolvido para ajudar no monitoramento contínuo de pacientes.\n");
-        System.out.println("by. Fernando Gabriel e Calebe - 2025\n");
+        System.out.println("by. Fernando Gabriel | Calebe Almeida | Melissa Carolyne - 2025\n");
     }
 
     private void exibirMenuPrincipal() {
