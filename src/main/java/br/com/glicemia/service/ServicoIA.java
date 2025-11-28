@@ -8,16 +8,28 @@ import java.util.List;
 
 public interface ServicoIA {
 
-    @param // historicoRecente Lista dos últimos sinais vitais
-    @param // pergunta Pergunta específica do usuário
-    @return // Resposta da IA
-    @throws Exception // se houver erro na comunicação
+    /**
+     * Solicita uma recomendação de saúde baseada no histórico e pergunta do usuário.
+     *
+     * @param historicoRecente Lista dos últimos sinais vitais
+     * @param pergunta Pergunta específica do usuário
+     * @return Resposta da IA
+     * @throws Exception se houver erro na comunicação
+     */
     String solicitarRecomendacao(List<SinalVital> historicoRecente, String pergunta)
             throws Exception;
 
-    @return // true se a IA está acessível
+    /**
+     * Verifica se o serviço de IA está disponível.
+     *
+     * @return true se a IA está acessível
+     */
     boolean isDisponivel();
 
-    @return // Nome do provedor (ex: "OpenAI GPT-4", "Gemini Pro", "Local")
+    /**
+     * Retorna o nome do provedor de IA.
+     *
+     * @return Nome do provedor (ex: "OpenAI GPT-4", "Gemini Pro", "Local")
+     */
     String getNomeProvedor();
 }
