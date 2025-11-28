@@ -129,6 +129,33 @@
                             <mainClass>br.com.glicemia.TestAlertas</mainClass>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>test-ia</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>br.com.glicemia.TestIA</mainClass>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>test-chat</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>br.com.glicemia.TestChat</mainClass>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>app</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>br.com.glicemia.view.MenuPrincipal</mainClass>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
@@ -169,6 +196,24 @@
             <id>test-alertas</id>
             <build>
                 <defaultGoal>compile exec:java@test-alertas</defaultGoal>
+            </build>
+        </profile>
+        <profile>
+            <id>test-ia</id>
+            <build>
+                <defaultGoal>compile exec:java@test-ia</defaultGoal>
+            </build>
+        </profile>
+        <profile>
+            <id>test-chat</id>
+            <build>
+                <defaultGoal>compile exec:java@test-chat</defaultGoal>
+            </build>
+        </profile>
+        <profile>
+            <id>app</id>
+            <build>
+                <defaultGoal>compile exec:java@app</defaultGoal>
             </build>
         </profile>
     </profiles>
