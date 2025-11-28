@@ -12,7 +12,7 @@
 - ✅ **Test Driven**: Validação sistemática
 - ✅ **Exceções**: Testes de fluxos alternativos
 
-## 🔧 Implementação
+## 🔧 Implementação - Com modelos base para ideação de desenvolvimento
 
 ### 1. Testes do Modelo - GlicemiaTest
 
@@ -494,10 +494,3 @@ mvn test
 [INFO] -------------------------------------------------------
 ```
 
-## 📌 Próximos Passos
-
-**Próxima fase**: **[Fase 10 - Testes de Integração](./10-testes-integracao.md)**
-
----
-
-**Conceitos implementados**: JUnit 5 ✅ | Mocks ✅ | Cobertura de Testes ✅

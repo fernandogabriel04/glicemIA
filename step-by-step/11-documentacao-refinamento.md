@@ -319,9 +319,9 @@ Quando detectada emergência, o sistema exibe:
 
 ```
 Verifique:
-- Oracle Database está rodando
+- Banco de dados está rodando
 - Credenciais em database.properties estão corretas
-- Porta 1521 está acessível
+- Porta do banco de dados está acessível
 ```
 
 ### IA Não Responde
@@ -338,7 +338,6 @@ O sistema usa fallback automático:
 Para dúvidas ou problemas:
 - Consulte a documentação técnica (JavaDoc)
 - Revise o README.me do projeto
-- Contate o desenvolvedor
 ```
 
 ### 4. Checklist de Apresentação
@@ -447,14 +446,14 @@ R: Encapsulamento impede alterações diretas. Validações impedem dados invál
 
 ### 5. README Principal Atualizado
 
-Atualize o `README.me` do projeto:
+Atualizar o `README.me` do projeto:
 
 ```markdown
 # GlicemIA - Monitor Metabólico Inteligente
 
 ## 📋 Sobre o Projeto
 
-Sistema de monitoramento de saúde metabólica que combina regras determinísticas (Java) para segurança clínica com IA generativa para recomendações personalizadas.
+Sistema de monitoramento de diabetes e hipertensos que combina regras determinísticas (Java) para segurança clínica com IA generativa para recomendações personalizadas.
 
 ## 🎯 Funcionalidades
 
@@ -470,15 +469,15 @@ Sistema de monitoramento de saúde metabólica que combina regras determinístic
 ## 🏗️ Arquitetura
 
 - **Modelo**: Value Objects com OO puro
-- **Persistência**: Oracle Database via JDBC
+- **Persistência**: Banco de dados relacional via JDBC
 - **Lógica de Negócio**: Camada BO
 - **Interface**: Console interativo
-- **IA**: OpenAI/Gemini com fallback local
+- **IA**: OpenAI com fallback local
 
 ## 🚀 Como Executar
 
-1. Configure `database.properties`
-2. Execute script SQL de criação de tabelas
+1. Configurar `database.properties`
+2. Executar script SQL de criação de tabelas
 3. Compile: `mvn clean package`
 4. Execute: `java -jar target/glicemia.jar`
 
@@ -491,6 +490,7 @@ mvn verify            # Todos os testes
 ```
 
 ## 📚 Documentação
+criar documentação
 
 - [Manual do Usuário](docs/MANUAL_USUARIO.md)
 - [JavaDoc](docs/javadoc/index.html)
@@ -504,7 +504,7 @@ mvn verify            # Todos os testes
 
 ## 📄 Licença
 
-Projeto acadêmico - FIAP 2025
+Projeto acadêmico - POO 2025
 ```
 
 ## ✅ Checklist Final
@@ -535,40 +535,3 @@ Projeto acadêmico - FIAP 2025
 - [ ] Banco de dados configurado
 - [ ] Exemplos de uso preparados
 - [ ] Resposta para perguntas frequentes
-
-## 🎉 Projeto Completo!
-
-Parabéns! Você concluiu todas as 11 fases do desenvolvimento do GlicemIA.
-
-### O que foi construído:
-
-1. ✅ **11 Fases de Desenvolvimento**
-2. ✅ **Arquitetura MVC/DAO Completa**
-3. ✅ **Orientação a Objetos Pura**
-4. ✅ **Integração com IA**
-5. ✅ **Sistema de Segurança Robusto**
-6. ✅ **Testes Abrangentes (>80%)**
-7. ✅ **Documentação Profissional**
-
-### Próximos Passos (Opcional):
-
-- Implementar interface web (JavaServer Faces)
-- Adicionar relatórios em PDF
-- Implementar notificações por email
-- Criar dashboard com gráficos
-- Deploy em servidor
-
----
-
-**Boa sorte na apresentação! 🚀**
-```
-
-## 📌 Fim do Plano
-
-**Todas as 11 fases concluídas!**
-
-Este plano detalhado cobre todo o ciclo de desenvolvimento do projeto GlicemIA, desde a configuração inicial até a documentação final.
-
----
-
-**Conceitos implementados**: Documentação ✅ | UML ✅ | Manual ✅ | Apresentação ✅
